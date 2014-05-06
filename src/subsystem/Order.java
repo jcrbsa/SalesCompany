@@ -97,7 +97,7 @@ public class Order {
 
         if (shipping.deliveryTime > Shipping.TEMPO_MAXIMO_ENTREGA) {
             throw new Exception(
-                    "o produto no pode ser entregue no prazo m�ximo do tipo de frete escolhido ao fechar a compra!");
+                    "o produto no pode ser entregue no prazo máximo do tipo de frete escolhido ao fechar a compra!");
         }
         order.setPayment(payment);
         order.setShipping(shipping);

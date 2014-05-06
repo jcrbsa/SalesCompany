@@ -15,7 +15,7 @@ public class OrderItem {
     }
 
     public double calculatePriceItem(Shipping shipping) {
-        return product.calculatePrice(this.quantity) + product.calculateWeight(this.quantity) * shipping.getPricePerKg();
+        return product.calculatePrice(this.getQuantity()) + product.calculateWeight(this.getQuantity()) * shipping.getPricePerKg();
     }
 
     public void setProduct(Product product) {

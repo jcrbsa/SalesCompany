@@ -4,14 +4,21 @@
  */
 package swing.visualizar;
 
+import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.CreditCard;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Customer;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Order;
+import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Payment;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Product;
+import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Shipping;
 import fachada.FachadaCustomers;
 import fachada.FachadaOrders;
 import fachada.FachadaProducts;
 import java.awt.Rectangle;
+import java.util.AbstractList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import swing.cadastrar.FormCadastroVenda;
@@ -216,7 +223,7 @@ public class FormConsultaVenda extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -269,19 +276,33 @@ public class FormConsultaVenda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    List<Order> lista;
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-        
+    List<Order> lista =  new ArrayList<Order>();
+    
+    
+    public void listVendas(){
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.setColumnIdentifiers(new String[]{"Nº Pedido", "Cliente","Total"});
         FachadaOrders rep = FachadaOrders.getInstance();
         this.lista = rep.visualizeOrders();
         for (int i = 0; i < lista.size(); i++) {
-            modelo.addRow(new Object[]{this.lista.get(i).getNumber(), this.lista.get(i).getCustomer().getName(),this.lista.get(i).calculateOrderPayment()});
+            this.lista.get(i).setPayment(new CreditCard());
+            this.lista.get(i).setShipping(new Shipping(10,3));
+    
+            try {
+                 this.lista.get(i).checkout(this.lista.get(i), this.lista.get(i).getPayment() , this.lista.get(i).getShipping());
+                modelo.addRow(new Object[]{this.lista.get(i).getNumber(), this.lista.get(i).getCustomer().getName(), this.lista.get(i).getTotalOrderPayment()});
+            } catch (Exception ex) {
+                System.err.println("Error Message: " + ex.getMessage());
+            }
         }
 
         jTable5.setModel(modelo);
+        
+    }
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        
+        listVendas();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -296,23 +317,29 @@ public class FormConsultaVenda extends javax.swing.JFrame {
          try {
            
             FachadaOrders.getInstance().deleteOrder(jTable5.getSelectedRow());
-            
+            listVendas();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
-        // TODO add your handling code here:
+    
+    public void listItemVendas(){
         
-         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new String[]{"Produto", "Qt","Peso","Preço" });
+            DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new String[]{"Produto","Peso","Preço","Qt" });
        Order order = this.lista.get(jTable5.getSelectedRow());
         for (int i = 0; i < order.getItems().size(); i++) {
-            modelo.addRow(new Object[]{order.getItems().get(i).getProduct().getName(), order.getItems().get(i).getQuantity(),order.getItems().get(i).getProduct().calculateWeight(order.getItems().get(i).getQuantity()),order.getItems().get(i).getProduct().calculatePrice(order.getItems().get(i).getQuantity())});
+            modelo.addRow(new Object[]{order.getItems().get(i).getProduct().getName(), order.getItems().get(i).getProduct().getWeight(),order.getItems().get(i).getProduct().getWeight(), order.getItems().get(i).getProduct().getPrice()});
         }
 
         jTable1.setModel(modelo);
+        
+    }
+    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+        // TODO add your handling code here:
+        
+     listItemVendas();
         
     }//GEN-LAST:event_jTable5MouseClicked
 

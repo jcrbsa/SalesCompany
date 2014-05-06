@@ -8,11 +8,13 @@ import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Customer;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Order;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.OrderItem;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Product;
+import com.sun.jmx.snmp.BerDecoder;
 import fachada.FachadaCustomers;
 import fachada.FachadaOrderItems;
 import fachada.FachadaOrders;
 import fachada.FachadaProducts;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -27,15 +29,27 @@ public class FormCadastroVenda extends javax.swing.JFrame {
     /**
      * Creates new form FormCadastroVenda
      */
-    List<Customer> listaCliente = FachadaCustomers.getInstance().visualizeCliente();
-    List<Product> listaProduto = FachadaProducts.getInstance().visualizeProduto();
-    Order order;
+    //List<Customer> listaCliente = FachadaCustomers.getInstance().visualizeCliente();
+    //List<Product> listaProduto = FachadaProducts.getInstance().visualizeProduto();
+    List<Customer> listaCliente = new ArrayList<Customer>();
+    List<Product> listaProduto =  new ArrayList<Product>();
+    Order order = new Order();
+    
+
 
     public FormCadastroVenda() {
         initComponents();
 
         carregarCombos();
         this.centralizeFrame();
+        
+        listaCliente.add(new Customer("Richardson Bruno", "Moacir Sales"));
+        listaCliente.add(new Customer("Ivo ", "Arthur Muniz"));
+        
+        listaProduto.add(new Product("Cracha", 50.0, 20.0));
+        listaProduto.add(new Product("Catraca", 200.00, 100.0));
+        
+        this.carregarCombos();
     }
 
     public void centralizeFrame() {
@@ -66,11 +80,14 @@ public class FormCadastroVenda extends javax.swing.JFrame {
     }
 
     public void listarItens() {
-        DefaultTableModel modelo = new DefaultTableModel();
+      DefaultTableModel  modelo = new DefaultTableModel();
         modelo.setColumnIdentifiers(new String[]{"Produto", "Peso", "Preço", "Qt"});
 
         for (int i = 0; i < order.getItems().size(); i++) {
-            modelo.addRow(new Object[]{order.getItems().get(i).getProduct().getName(), order.getItems().get(i).getProduct().getWeight(), order.getItems().get(i).getProduct().getQuantidade(), order.getItems().get(i).getProduct().getQuantidade()});
+            modelo.addRow(new Object[]{order.getItems().get(i).getProduct().getName(), 
+                order.getItems().get(i).getProduct().getWeight(),
+                order.getItems().get(i).getProduct().getQuantidade(),
+                order.getItems().get(i).getProduct().getQuantidade()});
         }
 
         jTable1.setModel(modelo);
@@ -128,15 +145,7 @@ public class FormCadastroVenda extends javax.swing.JFrame {
             new String [] {
                 "Produto", "Peso", "Preço", "Qt"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(jTable1);
 
         jButton3.setText("Novo Item");
@@ -174,36 +183,40 @@ public class FormCadastroVenda extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel6)
-                        .addGap(236, 236, 236)
-                        .addComponent(jLabel7)
-                        .addGap(85, 85, 85)
-                        .addComponent(jLabel5))
+                        .addComponent(jScrollPane1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton3)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap()
+                                .addComponent(jLabel6)
+                                .addGap(236, 236, 236)
+                                .addComponent(jLabel7)
+                                .addGap(85, 85, 85)
+                                .addComponent(jLabel5))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(jButton4)))))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
-                    .addComponent(jLabel4))
-                .addGap(168, 168, 168))
+                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton3)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jButton4))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 296, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,14 +228,11 @@ public class FormCadastroVenda extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -264,26 +274,25 @@ public class FormCadastroVenda extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(189, 189, 189)
-                                .addComponent(jButton1)
-                                .addGap(80, 80, 80)
-                                .addComponent(jButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addComponent(jLabel3)
                                 .addGap(237, 237, 237)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 498, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(94, 94, 94)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(94, 94, 94)
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(304, 304, 304)
+                                .addComponent(jButton1)
+                                .addGap(113, 113, 113)
+                                .addComponent(jButton2)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -300,10 +309,10 @@ public class FormCadastroVenda extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -313,14 +322,14 @@ public class FormCadastroVenda extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(52, 52, 52))
         );
 
         pack();
@@ -339,8 +348,12 @@ public class FormCadastroVenda extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-            this.order.getCustomer().setName(this.listaCliente.get(jComboBox1.getSelectedIndex()).getName());
-            this.order.getCustomer().setAddress(this.listaCliente.get(jComboBox1.getSelectedIndex()).getAddress());
+ 
+                   
+            
+         
+            Customer customer = new Customer(this.listaCliente.get(jComboBox1.getSelectedIndex()).getName(), jTextField2.getText());
+            this.order.setCustomer(customer);
             FachadaOrders.getInstance().realizeOrder(order);
             JOptionPane.showMessageDialog(null, "Venda Cadastrada com Sucesso");
             this.dispose();
@@ -366,14 +379,17 @@ public class FormCadastroVenda extends javax.swing.JFrame {
             
             produto.setWeight(Double.parseDouble(jTextField5.getText()));
             produto.setPrice(Double.parseDouble(jTextField4.getText()));
-            produto.setQuantidade(Integer.parseInt(jTextField3.getText()));
+            produto.setQuantidade(Double.parseDouble(jTextField3.getText()));
             
            
-           
+            orderItem.setProduct(produto);
+            orderItem.setQuantity(orderItem.getQuantity() + Integer.parseInt(jTextField3.getText()));
             //FachadaOrderItems.getInstance().realizeOrderItems(orderItem);
             order.getItems().add(orderItem);
+           
+           
             JOptionPane.showMessageDialog(null, "ItemVenda Adicionado com Sucesso");
-            listarItens();
+             listarItens();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
@@ -387,7 +403,15 @@ public class FormCadastroVenda extends javax.swing.JFrame {
         // TODO add your handling code here:
         
            try {
+               
+ 
            order.getItems().remove(jTable1.getSelectedRow());
+           int soma = 0;
+               for (OrderItem orderItem : order.getItems()) {
+                   soma+= orderItem.getProduct().getQuantidade();
+                   orderItem.setQuantity(soma);
+               }
+               
            JOptionPane.showMessageDialog(null, "ItemVenda Excluido com Sucesso");
             listarItens();
         } catch (Exception ex) {

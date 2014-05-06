@@ -60,7 +60,7 @@ public class Receipt {
 		test.add(Calendar.DAY_OF_WEEK, this.order.getShipping().getDeliveryTime() );
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		String format = simpleDateFormat.format(new Date(test.getTimeInMillis()));
-		buffer.append("Previsïsao de Entrega:");
+		buffer.append("PrevisÃ£o de Entrega:");
 		buffer.append(format);
 		buffer.append(" \n ");
 

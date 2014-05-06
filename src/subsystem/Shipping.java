@@ -15,7 +15,7 @@ public class Shipping {
 		
 		if(formPayment == Shipping.CrediCard){
 			if(price > 100){
-				System.out.println("Frete Grátis" );
+				System.out.println("Frete GrÃ¡tis" );
 				pricePerWeight = 0;
 			}
 			
@@ -38,7 +38,7 @@ public void checarProduto(Product produto){
 		if(produto.perecivel == true){
 		
 		
-				System.out.println("tempo máximo de entrega de dois dias e 10% no preï¿½o do frete." );
+				System.out.println("tempo mï¿½ximo de entrega de dois dias e 10% no preÃ§o do frete." );
 				
 				
 				
