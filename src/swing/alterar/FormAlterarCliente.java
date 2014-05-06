@@ -8,7 +8,7 @@ import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Customer;
 import fachada.FachadaCustomers;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
-import view.visualizar.FormConsultaCliente;
+import swing.visualizar.FormConsultaCliente;
 
 /**
  *

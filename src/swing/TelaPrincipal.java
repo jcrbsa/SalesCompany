@@ -5,9 +5,9 @@
 package swing;
 
 import java.awt.Rectangle;
-import view.visualizar.FormConsultaCliente;
-import view.visualizar.FormConsultaProduto;
-import view.visualizar.FormConsultaVenda;
+import swing.visualizar.FormConsultaCliente;
+import swing.visualizar.FormConsultaProduto;
+import swing.visualizar.FormConsultaVenda;
 
 /**
  *

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.visualizar;
+package swing.visualizar;
 
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Customer;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Order;
