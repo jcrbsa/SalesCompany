@@ -289,6 +289,8 @@ public class FormConsultaVenda extends javax.swing.JFrame {
             this.lista.get(i).setShipping(new Shipping(10,3));
     
             try {
+                
+                //Corrigir realizar soma
                  this.lista.get(i).checkout(this.lista.get(i), this.lista.get(i).getPayment() , this.lista.get(i).getShipping());
                 modelo.addRow(new Object[]{this.lista.get(i).getNumber(), this.lista.get(i).getCustomer().getName(), this.lista.get(i).getTotalOrderPayment()});
             } catch (Exception ex) {
