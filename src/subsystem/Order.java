@@ -8,7 +8,11 @@ import java.util.List;
 
 public class Order {
 
-    public static int number;
+    private int number;
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
     private double totalOrderPayment;
     private Customer customer;
     private Payment payment;
@@ -16,6 +20,17 @@ public class Order {
     public static int id = 0;
     private Product product;
     private int quantity;
+     double sumPriceItems;
+
+    public double getSumPriceItems() {
+        return sumPriceItems;
+    }
+
+    public void setSumPriceItems(double sumPriceItems) {
+        this.sumPriceItems = sumPriceItems;
+    }
+    
+            
 
     public double getTotalOrderPayment() {
         return totalOrderPayment;
@@ -34,8 +49,9 @@ public class Order {
     }
 
     public Order() {
-
-        number++;
+        number = id;
+        id++;
+       
     }
 
     public int getNumber() {

@@ -12,17 +12,14 @@ package view;
 
 
 //Produto Abstrato
-public abstract class Report {
+public interface Report {
 
-    protected String content;
 
-    public String getContent() {
-        return content;
-    }
 
-    public abstract void getType();
     
-   public abstract void printSalesCheckout();
+    public void getKind();
+    
+   public void printSalesCheckout();
     //public abstract void creatReport();
 
 }

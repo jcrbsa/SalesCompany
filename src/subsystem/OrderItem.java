@@ -4,14 +4,16 @@ public class OrderItem {
 
     private Product product;
     private int quantity;
+    
 
     public OrderItem(Product product, int i) {
 
         this.product = product;
-        this.quantity = i;
+        this.quantity = 1;
     }
 
     public OrderItem() {
+        this.quantity = 1;
     }
 
     public double calculatePriceItem(Shipping shipping) {

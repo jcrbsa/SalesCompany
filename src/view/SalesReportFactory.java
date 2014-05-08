@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package view;
+
+import java.util.List;
+import swing.visualizar.SWINGSalesReport;
 
 /**
  *
  * @author bruno.andrade
  */
 public class SalesReportFactory {
-        public static Report getSalesReport(String style){
-            
-            if("PDF".equals(style)){
-                return new PDFSalesReport();
-            }else if("SWING".equals(style)){
-                return new SWINGSalesReport();
-            }else
-                return null;
+
+    public Report getSalesReport(String style, List orders) {
+
+        if ("PDF".equals(style)) {
+            return new PDFSalesReport(orders);
+        } else if ("SWING".equals(style)) {
+            return new SWINGSalesReport(orders);
+        } else {
+            return null;
         }
+    }
 }
