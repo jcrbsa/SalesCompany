@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author bruno.andrade
  */
-public class PDFSalesReport implements Report {
+public class PDFSalesReport extends Report {
 
     List<Order> generics;
 

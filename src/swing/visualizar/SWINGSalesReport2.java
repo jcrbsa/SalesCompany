@@ -18,12 +18,12 @@ import view.Report;
  *
  * @author bruno.andrade
  */
-public class SWINGSalesReport extends javax.swing.JFrame implements Report {
+public class SWINGSalesReport2 extends javax.swing.JFrame {
 
     /**
      * Creates new form FormConsultaVendaCheckout
      */
-    public SWINGSalesReport() {
+    public SWINGSalesReport2() {
         initComponents();
         centralizeFrame();
 
@@ -31,17 +31,11 @@ public class SWINGSalesReport extends javax.swing.JFrame implements Report {
 
     List<Order> generics;
 
-    public SWINGSalesReport(List<Order> paramGenerics) {
+    public SWINGSalesReport2(List<Order> paramGenerics) {
         this.generics = paramGenerics;
     }
 
-    @Override
-    public void printSalesCheckout() {
-        for (Order order : generics) {
-
-            System.out.println(order.getNumber());
-        }
-    }
+   
 
     public void listOrdersCheckout() {
         DefaultTableModel modelo = new DefaultTableModel();
@@ -180,20 +174,20 @@ public class SWINGSalesReport extends javax.swing.JFrame implements Report {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SWINGSalesReport().setVisible(true);
+                new SWINGSalesReport2().setVisible(true);
             }
         });
     }
@@ -205,8 +199,5 @@ public class SWINGSalesReport extends javax.swing.JFrame implements Report {
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void getKind() {
-        System.out.println("SWINGSalesReport");
-    }
+
 }

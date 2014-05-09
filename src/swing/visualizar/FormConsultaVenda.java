@@ -327,7 +327,8 @@ List<Order> listOrdersCheckout = new ArrayList<Order>();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
-       int index   = jTable5.getSelectedRow();
+    
+       int index = jTable5.getSelectedRow();
 //selectedRow = jTable5.convertRowIndexToModel(selectedRow);
 
         try {
@@ -353,7 +354,7 @@ List<Order> listOrdersCheckout = new ArrayList<Order>();
         Report report = null;
         if(selectedIndex == 0){
            report = new ReportFactory().getReport("sales", "SWING", listOrdersCheckout);
-            
+            report.printSalesCheckout();
         }else if(selectedIndex == 1){
             report = new ReportFactory().getReport("sales", "PDF", listOrdersCheckout);
             

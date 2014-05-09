@@ -12,14 +12,14 @@ package view;
 
 
 //Produto Abstrato
-public interface Report {
+public abstract class Report  {
 
 
 
     
-    public void getKind();
+    public abstract void getKind();
     
-   public void printSalesCheckout();
+   public abstract void printSalesCheckout();
     //public abstract void creatReport();
 
 }

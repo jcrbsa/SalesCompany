@@ -6,7 +6,7 @@
 package view;
 
 import java.util.List;
-import swing.visualizar.SWINGSalesReport;
+import swing.visualizar.SWINGSalesReport2;
 
 /**
  *
