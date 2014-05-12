@@ -10,6 +10,7 @@ import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Order;
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Shipping;
 import fachada.FachadaOrders;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import view.Report;
@@ -18,45 +19,43 @@ import view.Report;
  *
  * @author bruno.andrade
  */
-public class SWINGSalesReport2 extends javax.swing.JFrame {
+public class SwingSalesReportView extends javax.swing.JFrame {
 
     /**
      * Creates new form FormConsultaVendaCheckout
      */
-    public SWINGSalesReport2() {
+    public SwingSalesReportView() {
         initComponents();
         centralizeFrame();
-
     }
-
     List<Order> generics;
 
-    public SWINGSalesReport2(List<Order> paramGenerics) {
+    public SwingSalesReportView(List<Order> paramGenerics) {
+    initComponents();
+        centralizeFrame();
         this.generics = paramGenerics;
-    }
 
-   
+        listOrdersCheckout();
+    }
 
     public void listOrdersCheckout() {
         DefaultTableModel modelo = new DefaultTableModel();
-        modelo.setColumnIdentifiers(new String[]{"Nº Pedido", "Cliente", "Total"});
-        FachadaOrders rep = FachadaOrders.getInstance();
-        this.generics = rep.visualizeOrders();
+        modelo.setColumnIdentifiers(new String[]{"Nº Pedido", "Cliente", "Endereço"});
+      
+     
         for (int i = 0; i < generics.size(); i++) {
-            this.generics.get(i).setPayment(new CreditCard());
-            this.generics.get(i).setShipping(new Shipping(10, 3));
 
             try {
 
                 //Corrigir realizar soma
                 //this.lista.get(i).checkout(this.lista.get(i), this.lista.get(i).getPayment() , this.lista.get(i).getShipping());
-                modelo.addRow(new Object[]{this.generics.get(i).getNumber(), this.generics.get(i).getCustomer().getName(), this.generics.get(i).getSumPriceItems()});
+                modelo.addRow(new Object[]{this.generics.get(i).getNumber()+1, this.generics.get(i).getCustomer().getName(), this.generics.get(i).getCustomer().getAddress()});
             } catch (Exception ex) {
                 System.err.println("Error Message: " + ex.getMessage());
             }
         }
 
-        jTable2.setModel(modelo);
+       jTable2.setModel(modelo);
     }
 
     public void centralizeFrame() {
@@ -78,14 +77,14 @@ public class SWINGSalesReport2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        fieldsetVendasCheckout = new javax.swing.JPanel();
+        tabelaVendasCheckout = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        botaoVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("VendasCheckout"));
+        fieldsetVendasCheckout.setBorder(javax.swing.BorderFactory.createTitledBorder("VendasCheckout"));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,30 +94,32 @@ public class SWINGSalesReport2 extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Nº", "Cliente", "Endereço"
+                "Nº Pedido", "Cliente", "Endereço"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        tabelaVendasCheckout.setViewportView(jTable2);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout fieldsetVendasCheckoutLayout = new javax.swing.GroupLayout(fieldsetVendasCheckout);
+        fieldsetVendasCheckout.setLayout(fieldsetVendasCheckoutLayout);
+        fieldsetVendasCheckoutLayout.setHorizontalGroup(
+            fieldsetVendasCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fieldsetVendasCheckoutLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                .addComponent(tabelaVendasCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+        fieldsetVendasCheckoutLayout.setVerticalGroup(
+            fieldsetVendasCheckoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fieldsetVendasCheckoutLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(tabelaVendasCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botaoVoltar.setText("Voltar");
+        botaoVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botaoVoltarActionPerformed(evt);
             }
         });
 
@@ -128,34 +129,30 @@ public class SWINGSalesReport2 extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(166, 166, 166)
-                .addComponent(jButton1)
-                .addContainerGap(171, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addComponent(botaoVoltar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(fieldsetVendasCheckout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addContainerGap()
+                .addComponent(fieldsetVendasCheckout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botaoVoltar)
                 .addContainerGap())
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(47, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void botaoVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoVoltarActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_botaoVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,30 +171,27 @@ public class SWINGSalesReport2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SwingSalesReportView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SwingSalesReportView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SwingSalesReportView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SWINGSalesReport2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SwingSalesReportView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SWINGSalesReport2().setVisible(true);
+                new SwingSalesReportView().setVisible(true);
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton botaoVoltar;
+    private javax.swing.JPanel fieldsetVendasCheckout;
     private javax.swing.JTable jTable2;
+    private javax.swing.JScrollPane tabelaVendasCheckout;
     // End of variables declaration//GEN-END:variables
-
-
 }

@@ -25,10 +25,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jcrbsa
  */
-public class FormCadastroVenda extends javax.swing.JFrame {
+public class RegisterOrderView extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormCadastroVenda
+     * Creates new form RegisterOrderView
      */
     //List<Customer> listaCliente = FachadaCustomers.getInstance().visualizeCliente();
     //List<Product> listaProduto = FachadaProducts.getInstance().visualizeProduto();
@@ -38,7 +38,7 @@ public class FormCadastroVenda extends javax.swing.JFrame {
     
 
 
-    public FormCadastroVenda() {
+    public RegisterOrderView() {
         initComponents();
 
         carregarCombos();
@@ -450,20 +450,20 @@ public class FormCadastroVenda extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormCadastroVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormCadastroVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormCadastroVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormCadastroVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegisterOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormCadastroVenda().setVisible(true);
+                new RegisterOrderView().setVisible(true);
             }
         });
     }

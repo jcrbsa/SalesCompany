@@ -10,19 +10,19 @@ import java.awt.Rectangle;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import swing.alterar.FormAlterarProduto;
-import swing.cadastrar.FormCadastroProduto;
+import swing.alterar.EditProductView;
+import swing.cadastrar.RegisterProductView;
 
 /**
  *
  * @author jcrbsa
  */
-public class FormConsultaProduto extends javax.swing.JFrame {
+public class ConsultProductView extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormConsultaProduto
+     * Creates new form ConsultProductView
      */
-    public FormConsultaProduto() {
+    public ConsultProductView() {
         initComponents();
         this.centralizeFrame();
     }
@@ -237,13 +237,13 @@ public class FormConsultaProduto extends javax.swing.JFrame {
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
 
-        FormAlterarProduto alterarCadastro = new FormAlterarProduto( lista.get(jTable2.getSelectedRow()),jTable2.getSelectedRow());
+        EditProductView alterarCadastro = new EditProductView( lista.get(jTable2.getSelectedRow()),jTable2.getSelectedRow());
         alterarCadastro.show();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        FormCadastroProduto cadastroProduto = new FormCadastroProduto();
+        RegisterProductView cadastroProduto = new RegisterProductView();
         cadastroProduto.show();
         
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -280,20 +280,20 @@ public class FormConsultaProduto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultProductView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormConsultaProduto().setVisible(true);
+                new ConsultProductView().setVisible(true);
             }
         });
     }

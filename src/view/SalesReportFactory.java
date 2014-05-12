@@ -6,7 +6,7 @@
 package view;
 
 import java.util.List;
-import swing.visualizar.SWINGSalesReport2;
+import swing.visualizar.SwingSalesReportView;
 
 /**
  *
@@ -16,10 +16,10 @@ public class SalesReportFactory {
 
     public Report getSalesReport(String style, List orders) {
 
-        if ("PDF".equals(style)) {
-            return new PDFSalesReport(orders);
-        } else if ("SWING".equals(style)) {
-            return new SWINGSalesReport(orders);
+        if ("pdf".equals(style)) {
+            return new PdfSalesReport(orders);
+        } else if ("swing".equals(style)) {
+            return new SwingSalesReport(orders);
         } else {
             return null;
         }

@@ -7,7 +7,7 @@ package view;
 
 import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Order;
 import java.util.List;
-import swing.visualizar.SWINGSalesReport2;
+import swing.visualizar.SwingSalesReportView;
 
 /**
  *

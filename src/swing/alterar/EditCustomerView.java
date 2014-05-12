@@ -8,24 +8,24 @@ import br.edu.ifpe.tads.lpoo2.grasp.parte3.subsystem.Customer;
 import fachada.FachadaCustomers;
 import java.awt.Rectangle;
 import javax.swing.JOptionPane;
-import swing.visualizar.FormConsultaCliente;
+import swing.visualizar.ConsultCustomerView;
 
 /**
  *
  * @author jcrbsa
  */
-public class FormAlterarCliente extends javax.swing.JFrame {
+public class EditCustomerView extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormAlterarCliente
+     * Creates new form EditCustomerView
      */
-    public FormAlterarCliente() {
+    public EditCustomerView() {
         initComponents();
         this.centralizeFrame();
     }
     Customer clienteAlterar;
 
-    public FormAlterarCliente(Customer cliente, int id) {
+    public EditCustomerView(Customer cliente, int id) {
         initComponents();
         this.centralizeFrame();
         this.clienteAlterar = cliente;
@@ -180,20 +180,20 @@ private int index =0;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormAlterarCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormAlterarCliente().setVisible(true);
+                new EditCustomerView().setVisible(true);
             }
         });
     }

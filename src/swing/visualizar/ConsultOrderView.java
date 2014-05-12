@@ -17,29 +17,32 @@ import java.awt.Rectangle;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import swing.cadastrar.FormCadastroVenda;
+import swing.cadastrar.RegisterOrderView;
 import view.Report;
 import view.ReportFactory;
-
+import utils.Logger;
 /**
  *
  * @author jcrbsa
  */
-public class FormConsultaVenda extends javax.swing.JFrame {
+public class ConsultOrderView extends javax.swing.JFrame {
 
   
     /**
-     * Creates new form FormConsultaVenda
+     * Creates new form ConsultOrderView
      */
-    public FormConsultaVenda() {
+    public ConsultOrderView() {
         initComponents();
         this.centralizeFrame();
+        listOrdersCheckout = new ArrayList<Order>();
+    
+        Logger.getLogger();
     }
     
+    List<Order> listOrdersCheckout;
    
     public void centralizeFrame() {
         int x, y;
@@ -68,6 +71,7 @@ public class FormConsultaVenda extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -142,6 +146,13 @@ public class FormConsultaVenda extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Em Tela", "PDF" }));
 
+        jButton3.setText("Voltar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -157,15 +168,19 @@ public class FormConsultaVenda extends javax.swing.JFrame {
                                 .addGap(46, 46, 46)
                                 .addComponent(jButton8))
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
+                                .addGap(41, 41, 41)
                                 .addComponent(jButton2)))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
                                 .addComponent(jButton7)
                                 .addGap(31, 31, 31)
-                                .addComponent(jButton1)))))
+                                .addComponent(jButton1))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jButton3)))))
                 .addGap(37, 37, 37))
         );
         jPanel6Layout.setVerticalGroup(
@@ -182,7 +197,8 @@ public class FormConsultaVenda extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3))
                 .addGap(405, 405, 405))
         );
 
@@ -243,8 +259,8 @@ public class FormConsultaVenda extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -270,10 +286,11 @@ public class FormConsultaVenda extends javax.swing.JFrame {
                 
                 //Corrigir realizar soma
                  //this.lista.get(i).checkout(this.lista.get(i), this.lista.get(i).getPayment() , this.lista.get(i).getShipping());
-                modelo.addRow(new Object[]{this.lista.get(i).getNumber(), this.lista.get(i).getCustomer().getName(), this.lista.get(i).getSumPriceItems()});
+                modelo.addRow(new Object[]{this.lista.get(i).getNumber() + 1, this.lista.get(i).getCustomer().getName(), this.lista.get(i).getSumPriceItems()});
             } catch (Exception ex) {
                 System.err.println("Error Message: " + ex.getMessage());
             }
+            Logger.printDetails("Listando Vendas...");
         }
 
         jTable5.setModel(modelo);
@@ -287,7 +304,8 @@ public class FormConsultaVenda extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        FormCadastroVenda form  = new FormCadastroVenda();
+         Logger.printDetails("Register Nova Order");
+        RegisterOrderView form  = new RegisterOrderView();
         form.show();
         
     }//GEN-LAST:event_jButton8ActionPerformed
@@ -295,8 +313,9 @@ public class FormConsultaVenda extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
          try {
-           
+                      Logger.printDetails("Deleting Order");
             FachadaOrders.getInstance().deleteOrder(jTable5.getSelectedRow());
+            listOrdersCheckout.remove(jTable5.getSelectedRow());
             listVendas();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -314,7 +333,7 @@ public class FormConsultaVenda extends javax.swing.JFrame {
         }
 
         jTable1.setModel(modelo);
-        
+                 Logger.printDetails("List ItemsOrder");
     }
     private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
         // TODO add your handling code here:
@@ -323,7 +342,7 @@ public class FormConsultaVenda extends javax.swing.JFrame {
  
         
     }//GEN-LAST:event_jTable5MouseClicked
-List<Order> listOrdersCheckout = new ArrayList<Order>();
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
@@ -334,9 +353,12 @@ List<Order> listOrdersCheckout = new ArrayList<Order>();
         try {
             
             lista.get(index).checkout(this.lista.get(index), this.lista.get(index).getPayment() , this.lista.get(index).getShipping());
-            listOrdersCheckout.add(lista.get(index));
+           listOrdersCheckout.add(lista.get(index));
+          
               FachadaOrders.getInstance().editOrder(index,lista.get(index) );
              JOptionPane.showMessageDialog(null, "Checkout da venda realizado com Sucesso!");
+                      Logger.printDetails("Realize Checkout");
+
         } catch (Exception ex) {
             
              JOptionPane.showMessageDialog(null, "Erro ao realizar Checkout da Venda");
@@ -350,23 +372,29 @@ List<Order> listOrdersCheckout = new ArrayList<Order>();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        int selectedIndex = jComboBox1.getSelectedIndex();
+       int selectedIndex = jComboBox1.getSelectedIndex();
         Report report = null;
+        
         if(selectedIndex == 0){
-           report = new ReportFactory().getReport("sales", "SWING", listOrdersCheckout);
+           report = new ReportFactory().getReport("sales", "swing", listOrdersCheckout);
             report.printSalesCheckout();
         }else if(selectedIndex == 1){
-            report = new ReportFactory().getReport("sales", "PDF", listOrdersCheckout);
-            
+            report = new ReportFactory().getReport("sales", "pdf", listOrdersCheckout);
+            report.printSalesCheckout();
     
         }
-        if(report != null){
-                    report.printSalesCheckout();
-        }else{
+        if(report == null){
+        
             JOptionPane.showMessageDialog(null, "Error ao visulizar as Vendas Checkout");
         }
-
+        
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,26 +413,27 @@ List<Order> listOrdersCheckout = new ArrayList<Order>();
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaVenda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultOrderView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormConsultaVenda().setVisible(true);
+                new ConsultOrderView().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;

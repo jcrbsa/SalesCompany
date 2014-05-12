@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package swing;
+package Tests;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;

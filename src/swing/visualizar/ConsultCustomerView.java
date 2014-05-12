@@ -11,19 +11,19 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import repository.RepositorioCustomer;
-import swing.alterar.FormAlterarCliente;
-import swing.cadastrar.FormCadastroCliente;
+import swing.alterar.EditCustomerView;
+import swing.cadastrar.RegisterCustomerView;
 
 /**
  *
  * @author jcrbsa
  */
-public class FormConsultaCliente extends javax.swing.JFrame {
+public class ConsultCustomerView extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormConsultaCliente
+     * Creates new form ConsultCustomerView
      */
-    public FormConsultaCliente() {
+    public ConsultCustomerView() {
         initComponents();
         this.centralizeFrame();
     }
@@ -172,7 +172,7 @@ public class FormConsultaCliente extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        FormCadastroCliente cadastroCliente = new FormCadastroCliente();
+        RegisterCustomerView cadastroCliente = new RegisterCustomerView();
         cadastroCliente.show();
        
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -180,7 +180,7 @@ public class FormConsultaCliente extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
        
-        FormAlterarCliente alterarCadastro = new FormAlterarCliente( lista.get(index),index);
+        EditCustomerView alterarCadastro = new EditCustomerView( lista.get(index),index);
         alterarCadastro.show();
 
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -225,20 +225,20 @@ public class FormConsultaCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormConsultaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ConsultCustomerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormConsultaCliente().setVisible(true);
+                new ConsultCustomerView().setVisible(true);
             }
         });
     }

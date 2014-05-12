@@ -20,6 +20,5 @@ public abstract class Report  {
     public abstract void getKind();
     
    public abstract void printSalesCheckout();
-    //public abstract void creatReport();
 
 }

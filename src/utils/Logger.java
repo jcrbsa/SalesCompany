@@ -21,7 +21,7 @@ public class Logger {
    public static Logger getLogger(){
        if(status)
        {  loggerObject = new Logger();
-           System.out.println("Create a neew Object");
+           System.out.println("Logger Actived");
            return loggerObject;
        }else{
            System.out.println("");
@@ -30,17 +30,19 @@ public class Logger {
            
    }
    
-   public void printDetails(String text){
+   public static void printDetails(String text){
+       if(status == true){
        System.out.println(text);
+       }
        
    }
-   public void turnON(){
+   public static void turnON(){
        status =  true;
       
        
    }
    
-   public void turnOFF(){
+   public static void turnOFF(){
        status = false;
 
    }
