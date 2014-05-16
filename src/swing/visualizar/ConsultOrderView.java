@@ -24,6 +24,7 @@ import swing.cadastrar.RegisterOrderView;
 import view.Report;
 import view.ReportFactory;
 import utils.Logger;
+import view.SalesReportFactory;
 /**
  *
  * @author jcrbsa
@@ -374,12 +375,13 @@ public class ConsultOrderView extends javax.swing.JFrame {
         // TODO add your handling code here:
        int selectedIndex = jComboBox1.getSelectedIndex();
         Report report = null;
-        
+        ReportFactory test =  new ReportFactory();
         if(selectedIndex == 0){
-           report = new ReportFactory().getReport("sales", "swing", listOrdersCheckout);
+            
+           report = test.getSalesReport("swing", listOrdersCheckout);
             report.printSalesCheckout();
         }else if(selectedIndex == 1){
-            report = new ReportFactory().getReport("sales", "pdf", listOrdersCheckout);
+            report = test.getSalesReport("pdf", listOrdersCheckout);
             report.printSalesCheckout();
     
         }

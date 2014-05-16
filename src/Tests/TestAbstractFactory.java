@@ -30,7 +30,7 @@ public class TestAbstractFactory {
     }
     
     public void  test(){
-          report = new ReportFactory().getReport("sales", "SWING", listOrdersCheckout);
+          report = new ReportFactory().getSalesReport("SWING", listOrdersCheckout);
           
                     report.getKind();
                     report.printSalesCheckout();

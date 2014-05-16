@@ -12,7 +12,7 @@ import swing.visualizar.SwingSalesReportView;
  *
  * @author bruno.andrade
  */
-public class SalesReportFactory {
+public class SalesReportFactory extends ReportFactory {
 
     public Report getSalesReport(String style, List orders) {
 

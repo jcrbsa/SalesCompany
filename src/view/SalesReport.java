@@ -6,12 +6,23 @@
 
 package view;
 
+import java.util.List;
+
 /**
  *
  * @author bruno.andrade
  */
-public  abstract class SalesReport {
-    
+public  class SalesReport {
+     public Report getSalesReport(String style, List orders) {
+
+        if ("pdf".equals(style)) {
+            return new PdfSalesReport(orders);
+        } else if ("swing".equals(style)) {
+            return new SwingSalesReport(orders);
+        } else {
+            return null;
+        }
+    }
 
     
 }

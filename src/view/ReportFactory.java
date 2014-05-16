@@ -15,11 +15,24 @@ import swing.visualizar.SwingSalesReportView;
  */
 public class ReportFactory {
 
-    public Report getReport(String type, String style,List<Order> ordersCheckouts) {
-        if ("sales".equals(type)) {
-            return new SalesReportFactory().getSalesReport(style, ordersCheckouts);
-        }else{
-        return null;
+//    public Report getReport(String type, String style, List<Order> ordersCheckouts) {
+//        if ("sales".equals(type)) {
+//            return new SalesReportFactory().getSalesReport(style, ordersCheckouts);
+//        } else {
+//            return null;
+//        }
+//    }
+    
+     public Report getSalesReport(String style, List orders) {
+
+        if ("pdf".equals(style)) {
+            return new PdfSalesReport(orders);
+        } else if ("swing".equals(style)) {
+            return new SwingSalesReport(orders);
+        } else {
+            return null;
         }
     }
+
+   // public abstract Report getSalesReport(String style, List orders);
 }
